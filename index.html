@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>KartmaX Vision MVP</h2>
+  <input type="file" id="imageInput">
+  <button onclick="upload()">Upload & Generate Tags</button>
+  <pre id="output"></pre>
+
+  <script>
+    async function upload() {
+      const file = document.getElementById('imageInput').files[0];
+      const formData = new FormData();
+      formData.append('image', file);
+      const res = await fetch('http://localhost:5000/generate_tags', { method: 'POST', body: formData });
+      const data = await res.json();
+      document.getElementById('output').textContent = JSON.stringify(data, null, 2);
+    }
+  </script>
+</body>
+</html>
